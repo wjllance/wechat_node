@@ -5,7 +5,7 @@
 ## 1 申请公众号测试账号
 https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
 - 申请成功之后页面会给出appID和appsecret(用于获取access_token)
-![申请测试账号](http://img.blog.csdn.net/20171027101958412?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva2luZ292/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![申请测试账号](http://img.blog.csdn.net/20171027101958412)
 - 在填写接口配置信息的时候需要后台配合验证才能配置成功
 
 ### 1.1 验证服务器
