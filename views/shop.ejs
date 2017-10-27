@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>velo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<h1>欢迎进入芒购商城, <%= name %></h1>
+
+	<img src="<%= img %>" style="width:150px;height:150px;">
+
+	<h4 class="status"></h4>
+
+	<button class="openCamera">扫描二维码</button>
+
+	<span class="test"></span>
+
+	<div class="one">123123</div>
+	
+	<h2></h2>
+
+
+
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		
+
+		var code = parseURL(window.location.href).code
+
+
+		$.ajax({
+			type:'get',
+			url:'http://kingov.cn/getWxConfig',  
+			data:{  nonceStr:'getoperateaccess' , url:location.href  },
+			dataType:'json',
+			error:function(er){
+				$('h2').html( JSON.stringify(er) )
+			},
+			success:function(data){
+
+				$('.test').html( JSON.stringify(data) )
+
+				wx.config({
+					debug:true,
+					appId:data.appId,
+					timestamp:data.timestamp,
+					nonceStr:'getoperateaccess',
+					signature:data.signature,
+					jsApiList: ['onMenuShareTimeline',
+						'onMenuShareAppMessage',
+						'onMenuShareQQ',
+						'onMenuShareWeibo',
+						'onMenuShareQZone',
+						'scanQRCode'
+					]
+				});
+
+
+
+				wx.ready(function(){
+					// $('.status').html('验证成功！').css({color:'green'})
+
+					$('.openCamera').on('click',function(){
+						wx.scanQRCode({
+						    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+						    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+						    success: function (res) {
+						    
+							}
+						});
+					})
+					
+				});
+
+
+				wx.error(function(err){
+					$('.status').html(JSON.stringify(err)).css({color:'red'})
+				})
+			}
+		})
+		
+
+
+
+
+
+		function parseURL(url) {
+		    var qs = url.split("?");
+		    qs = qs[1]?qs[1]:"";
+		    var obj = {}
+		    if ('string' !== typeof qs || qs.length === 0) {
+		        return obj;
+		    }
+
+		    var key = [];
+		    var eq = '='
+		    var decode = decodeURIComponent;
+		    qs = qs.split("&")
+		    var qsLen = qs.length
+		    for (var i = 0; i < qsLen; ++i) {
+		        var x = qs[i]
+		        var idx = x.indexOf('=');
+		        var k;
+		        var v;
+		        if (idx >= 0) {
+		            k = decode(x.substring(0, idx));
+		            v = decode(x.substring(idx + 1))
+		        } else {
+		            k = x;
+		            v = ''
+		        }
+		        if (key.indexOf(k) === -1) {
+		            obj[k] = v
+		            key.push(k)
+		        } else if (obj[k] instanceof Array) {
+		            obj[k].push(v)
+		        } else {
+		            obj[k] = [obj[k], v]
+		        }
+		    }
+
+		    return obj
+
+		};
+	</script>
+</body>
+</html>
