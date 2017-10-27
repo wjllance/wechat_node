@@ -297,16 +297,16 @@ router.get('/getWxConfig', (req, res) => {
 ```
 
 
-![发送文字-点击按钮](http://img.blog.csdn.net/20171027110339367?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva2luZ292/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![发送文字-点击按钮](http://img.blog.csdn.net/20171027110339367)
 
 
-![验证成功, debug弹出信息](http://img.blog.csdn.net/20171027110613590?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva2luZ292/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![验证成功, debug弹出信息](http://img.blog.csdn.net/20171027110613590)
 
 
-![点击按钮调用微信的扫描二维码的功能](http://img.blog.csdn.net/20171027111009375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva2luZ292/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![点击按钮调用微信的扫描二维码的功能](http://img.blog.csdn.net/20171027111009375)
 
 
-![debug提示调用相机成功](http://img.blog.csdn.net/20171027111143126?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva2luZ292/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![debug提示调用相机成功](http://img.blog.csdn.net/20171027111143126)
 
 
-![扫描二维码](http://img.blog.csdn.net/20171027111237261?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva2luZ292/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![扫描二维码](http://img.blog.csdn.net/20171027111237261)
