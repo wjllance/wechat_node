@@ -1,7 +1,27 @@
 var xml2js = require("xml2js");
 var tools = require("../config/tools.js");
-var { ChatGPTAPI } = import("chatgpt");
 const { config } = require("../config/config.js");
+const { getToken_JsApi } = require("../service/api.js");
+
+let chatGPTAPI;
+
+// TODO: redis/cache
+const userConversationId = {};
+
+const getChatGPTAPI = () =>
+  new Promise((resolve) => {
+    if (chatGPTAPI) {
+      resolve(chatGPTAPI);
+    } else {
+      import("chatgpt").then(({ ChatGPTAPI }) => {
+        chatGPTAPI = new ChatGPTAPI({
+          apiKey: config.openai.apiKey,
+          debug: true,
+        });
+        resolve(chatGPTAPI);
+      });
+    }
+  });
 
 // 处理用户发送过来的文字消息和点击事件
 exports.msg = (req, res) => {
@@ -29,22 +49,55 @@ exports.msg = (req, res) => {
         }
         //text表示文字信息
       } else if (json.xml.MsgType == "text") {
-        import("chatgpt").then(({ ChatGPTAPI }) => {
-          const api = new ChatGPTAPI({
-            apiKey: config.openai.apiKey,
-            debug: true,
-          });
+        const userId = json.xml.FromUserName;
+        res.send("success");
+        const conversation_id = userConversationId[userId];
 
-          api.sendMessage(json.xml.Content).then((ans) => {
-            console.log(json.xml.Content, "res:", ans.text);
-            //回复公众号的文字信息
-            res.send(
-              // tools.getXml(json, backTime, `你发"${json.xml.Content}"过来干啥？`)
-              tools.getXml(json, backTime, ans.text)
-            );
+        getChatGPTAPI().then((api) => {
+          const options = {};
+          if (conversation_id) {
+            options.conversationId = conversation_id;
+          }
+
+          api.sendMessage(json.xml.Content, options).then((ans) => {
+            // console.log(json.xml.Content, "res:", ans.text);
+
+            if (!conversation_id) {
+              userConversationId[userId] = ans.conversationId;
+            }
+
+            testSendCustomMsg(userId, ans.text);
           });
         });
       }
     });
   });
+};
+
+const testSendCustomMsg = async (touser, content = "test text") => {
+  const { access_token } = await getToken_JsApi();
+  const url = `https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=${access_token}`;
+
+  const json = {
+    touser,
+    msgtype: "text",
+    text: {
+      content,
+    },
+  };
+
+  const options = {
+    method: "POST",
+    body: JSON.stringify(json),
+  };
+
+  fetch(url, options)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then((data) => {
+      console.log(url + " ", options, "\nres:", data);
+    });
 };
