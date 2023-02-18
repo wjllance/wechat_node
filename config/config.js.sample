@@ -1,8 +1,8 @@
 exports.config = {
   wechat: {
-    appID: "wxb043b089995bb0a9",
+    appID: "wx6b0e30eec335b4eb",
     appsecret: "**",
-    token: "hellozheng",
+    token: "chatougpt",
   },
   openai: {
     apiKey: "**",
