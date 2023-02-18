@@ -1,0 +1,10 @@
+exports.config = {
+  wechat: {
+    appID: "wxb043b089995bb0a9",
+    appsecret: "**",
+    token: "hellozheng",
+  },
+  openai: {
+    apiKey: "**",
+  },
+};
