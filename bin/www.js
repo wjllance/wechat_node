@@ -7,6 +7,7 @@
 var app = require("../app.js");
 var debug = require("debug")("wechatnode:server");
 var http = require("http");
+const { setupTelegramBot } = require("../service/telegram.js");
 
 /**
  * Get port from environment and store in Express.
@@ -27,6 +28,8 @@ var server = http.createServer(app);
 server.listen(port, "0.0.0.0");
 server.on("error", onError);
 server.on("listening", onListening);
+
+setupTelegramBot();
 
 /**
  * Normalize a port into a number, string, or false.

@@ -16,11 +16,11 @@ var data = {
 };
 
 // 获取access_token和jsapi_ticket
-api.getToken_JsApi().then((obj) => {
-  data.access_token_main = obj.access_token;
+// api.getToken_JsApi().then((obj) => {
+//   data.access_token_main = obj.access_token;
 
-  data.jsapi_ticket = obj.jsapi_ticket;
-});
+//   data.jsapi_ticket = obj.jsapi_ticket;
+// });
 
 // 处理用户发送来的消息, 包括文字和点击事件
 router.post("/", handleEvent.msg);

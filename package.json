@@ -14,6 +14,7 @@
     "ejs": "^3.1.8",
     "express": "~4.15.2",
     "morgan": "^1.10.0",
+    "node-telegram-bot-api": "^0.61.0",
     "request": "^2.83.0",
     "serve-favicon": "~2.4.2",
     "sha1": "^1.1.1",
